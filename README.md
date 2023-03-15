@@ -1,7 +1,7 @@
 # Calculator App
 This is a simple calculator application built using Java Swing. It supports basic arithmetic operations such as addition, subtraction, multiplication, and division.
 
-### How to Play
+### How to Use
 1. Enter the first number using the number buttons.
 2. Press one of the arithmetic operation buttons.
 3. Enter the second number using the number buttons.
