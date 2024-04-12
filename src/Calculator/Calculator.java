@@ -1,5 +1,10 @@
 package Calculator;
 
+import static java.awt.Font.PLAIN;
+import static java.lang.Double.parseDouble;
+import static java.lang.String.valueOf;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,27 +15,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Calculator implements ActionListener {
-  JFrame frame;
-  JPanel panel;
-  JTextField jTextField;
-  JButton[] numbers = new JButton[10];
-  JButton[] functions = new JButton[9];
-  JButton addButton, subButton, mulButton, divButton;
-  JButton decButton, equButton, delButton, clrButton, negButton;
-  Font font = new Font("Comic Sans MS", Font.PLAIN, 30);
-  double num1 = 0, num2 = 0, result = 0;
-  char operator;
+  private final JTextField jTextField = new JTextField();;
+  private final JButton[] numbers = new JButton[10];
+  private final JButton addButton, subButton, mulButton, divButton;
+  private final JButton decButton, equButton, delButton, clrButton, negButton;
+
+  private double num1 = 0;
+  private char operator;
 
   public Calculator() {
-    frame = new JFrame("My calculator");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    JFrame frame = new JFrame("My calculator");
+    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setSize(450, 550);
     frame.setLayout(null);
     frame.setResizable(false);
     frame.setLocationRelativeTo(null);
 
-    jTextField = new JTextField();
     jTextField.setBounds(75, 25, 300, 50);
+    Font font = new Font("Comic Sans MS", PLAIN, 30);
     jTextField.setFont(font);
     jTextField.setEditable(false);
 
@@ -44,6 +46,7 @@ public class Calculator implements ActionListener {
     clrButton = new JButton("Clear");
     negButton = new JButton("(-)");
 
+    JButton[] functions = new JButton[9];
     functions[0] = addButton;
     functions[1] = subButton;
     functions[2] = mulButton;
@@ -61,7 +64,7 @@ public class Calculator implements ActionListener {
     }
 
     for (int i = 0; i < 10; i++) {
-      numbers[i] = new JButton(String.valueOf(i));
+      numbers[i] = new JButton(valueOf(i));
       numbers[i].addActionListener(this);
       numbers[i].setFont(font);
       numbers[i].setFocusable(false);
@@ -71,7 +74,7 @@ public class Calculator implements ActionListener {
     delButton.setBounds(156, 430, 127, 50);
     clrButton.setBounds(283, 430, 127, 50);
 
-    panel = new JPanel();
+    JPanel panel = new JPanel();
     panel.setBounds(75, 100, 300, 300);
     panel.setLayout(new GridLayout(4, 4, 10, 10));
 
@@ -103,58 +106,65 @@ public class Calculator implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     for (int i = 0; i < 10; i++) {
-      if (e.getSource() == numbers[i]) jTextField.setText(jTextField.getText().concat(String.valueOf(i)));
+      if (e.getSource() == numbers[i]) jTextField.setText(jTextField.getText().concat(valueOf(i)));
     }
 
-    if (e.getSource() == decButton) jTextField.setText(jTextField.getText().concat("."));
+    if (e.getSource() == decButton) {
+      jTextField.setText(jTextField.getText().concat("."));
+    }
 
     if (e.getSource() == addButton) {
-      num1 = Double.parseDouble(jTextField.getText());
+      num1 = parseDouble(jTextField.getText());
       operator = '+';
       jTextField.setText("");
     }
 
     if (e.getSource() == subButton) {
-      num1 = Double.parseDouble(jTextField.getText());
+      num1 = parseDouble(jTextField.getText());
       operator = '-';
       jTextField.setText("");
     }
 
     if (e.getSource() == mulButton) {
-      num1 = Double.parseDouble(jTextField.getText());
+      num1 = parseDouble(jTextField.getText());
       operator = '*';
       jTextField.setText("");
     }
 
     if (e.getSource() == divButton) {
-      num1 = Double.parseDouble(jTextField.getText());
+      num1 = parseDouble(jTextField.getText());
       operator = '/';
       jTextField.setText("");
     }
 
     if (e.getSource() == equButton) {
-      num2 = Double.parseDouble(jTextField.getText());
+      double num2 = parseDouble(jTextField.getText());
+      double result = 0;
       switch (operator) {
         case '+' -> result = num1 + num2;
         case '-' -> result = num1 - num2;
         case '*' -> result = num1 * num2;
         case '/' -> result = num1 / num2;
       }
-      jTextField.setText(String.valueOf(result));
+      jTextField.setText(valueOf(result));
       num1 = result;
     }
 
-    if (e.getSource() == clrButton) jTextField.setText("");
+    if (e.getSource() == clrButton) {
+      jTextField.setText("");
+    }
 
     if (e.getSource() == delButton) {
       String string = jTextField.getText();
       jTextField.setText("");
-      for (int i = 0; i < string.length() - 1; i++) jTextField.setText(jTextField.getText() + string.charAt(i));
+      for (int i = 0; i < string.length() - 1; i++) {
+        jTextField.setText(jTextField.getText() + string.charAt(i));
+      }
     }
 
     if (e.getSource() == negButton) {
-      double temp = Double.parseDouble(jTextField.getText()) * -1;
-      jTextField.setText(String.valueOf(temp));
+      double temp = parseDouble(jTextField.getText()) * -1;
+      jTextField.setText(valueOf(temp));
     }
   }
 }
