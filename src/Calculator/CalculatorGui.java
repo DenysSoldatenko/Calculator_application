@@ -14,8 +14,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Calculator implements ActionListener {
-  private final JTextField jTextField = new JTextField();;
+public class CalculatorGui implements ActionListener {
+  private final JTextField jTextField = new JTextField();
   private final JButton[] numbers = new JButton[10];
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, delButton, clrButton, negButton;
@@ -23,7 +23,7 @@ public class Calculator implements ActionListener {
   private double num1 = 0;
   private char operator;
 
-  public Calculator() {
+  public CalculatorGui() {
     JFrame frame = new JFrame("My calculator");
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setSize(450, 550);

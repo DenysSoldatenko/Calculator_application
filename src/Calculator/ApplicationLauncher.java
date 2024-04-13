@@ -1,7 +1,7 @@
 package Calculator;
 
-public class Main {
+public class ApplicationLauncher  {
   public static void main(String[] args) {
-    new Calculator();
+    new CalculatorGui();
   }
 }
