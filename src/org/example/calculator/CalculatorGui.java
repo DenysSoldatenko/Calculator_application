@@ -14,6 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * GUI for a simple calculator application.
+ *
+ * <p>This class sets up the user interface for the calculator, including buttons for digits,
+ * operations, and display. It also handles user input and performs the necessary calculations.
+ */
 public class CalculatorGui implements ActionListener {
   private final JTextField textField = new JTextField();
   private final JButton[] numbers = new JButton[10];
@@ -23,6 +29,10 @@ public class CalculatorGui implements ActionListener {
   private double num1 = 0;
   private char operator;
 
+  /**
+   * Constructs a {@code CalculatorGui} object and sets up the GUI.
+   * Initializes the frame, buttons, and layout, and sets up event listeners for button actions.
+   */
   public CalculatorGui() {
     JFrame frame = new JFrame("My calculator");
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -141,7 +151,7 @@ public class CalculatorGui implements ActionListener {
 
     if (e.getSource() == equButton) {
       double num2 = parseDouble(textField.getText());
-      double result = 0;
+      double result;
       switch (operator) {
         case '+' -> result = num1 + num2;
         case '-' -> result = num1 - num2;
